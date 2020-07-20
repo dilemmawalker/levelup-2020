@@ -872,6 +872,7 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
         //  System.out.println(ma);
         // int []val={0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15,8};
         // int[]wt={10,20,30};
+        //writing in different contexts
         int[]arr={1,2,3,4,5,6};
         int[][]dp=new int[arr.length][arr.length];
         System.out.println(mcm(arr,0,arr.length-1,dp));
