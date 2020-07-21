@@ -846,7 +846,6 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
 }
 public static void new_code{
 //new lines entered;
-//entertaining done
 for(int i=0;i<5;i++)
 }
     
