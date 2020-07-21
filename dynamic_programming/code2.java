@@ -844,6 +844,7 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
     }
     return dp[si][ei]=ans;
 }
+//asdfghjk
     
     public static void display(int[][]arr){
         int n=arr.length;
