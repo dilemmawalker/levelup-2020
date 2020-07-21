@@ -845,8 +845,8 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
     return dp[si][ei]=ans;
 }
 public static void new_code{
-//new lines entered;
 for(int i=0;i<5;i++)
+i++;
 }
     
     public static void display(int[][]arr){
