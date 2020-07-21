@@ -19,7 +19,8 @@ public class code{
 
 
         return dp[sr][sc]=ans;
-    }a
+    }
+    //new question -not really
     public static int mazepath_dp(int sr,int sc,int er,int ec,int[][]dp){
         for(sr=er;sr>=0;sr--){
             for(sc=ec;sc>=0;sc--){
