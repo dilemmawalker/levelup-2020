@@ -844,6 +844,24 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
     }
     return dp[si][ei]=ans;
 }
+    public static int mcm_dp(int []arr,int si,int ei,int [][]dp){
+    int n=arr.length;
+    for(int gap=1;gap<n;gap++){
+        for(si=0,ei=gap;ei<n;si++,ei++){
+            if(si+1==ei)
+            continue;
+
+            int ans=0;
+            for(int cut =si+1;cut<ei;cut++){
+                int left=dp[si][cut];
+                int right=dp[cut][ei];
+                ans=left + arr[si]*arr[cut]*arr[ei] + right;
+            }
+            dp[si][ei]=ans;
+        }
+    }
+    return dp[0][n-1];
+}
     
     public static void display(int[][]arr){
         int n=arr.length;
@@ -875,7 +893,7 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
         //writing in different contexts
         int[]arr={1,2,3,4,5,6};
         int[][]dp=new int[arr.length][arr.length];
-        System.out.println(mcm(arr,0,arr.length-1,dp));
+        System.out.println(mcm_dp(arr,0,arr.length-1,dp));
         display(dp);
     }
 }
