@@ -68,9 +68,7 @@ public static int friends_problem_dp(int n,int[]dp){
     }
     return dp[n];
 }
-public static void friends_problem_2p(int n,int []dp){
 
-}
 public static int static fuy
 
     public  static void  display(int[][]arr){
