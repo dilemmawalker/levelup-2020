@@ -867,11 +867,13 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
 }
 public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
     int n=arr.length;
-    int[][]sdp=new int[n][n];
+    String[][]sdp=new String[n][n];
     for(int gap=1;gap<n;gap++){
         for(si=0,ei=gap;ei<n;si++,ei++){
-            if(si+1==ei)
+            if(si+1==ei){
+                sdp[si][ei]="A";
             continue;
+            }
 
             int ans=1000000;
             String a="";
@@ -881,8 +883,8 @@ public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
                 int cost=left+arr[si]*arr[cut]*arr[ei]+right;
                 if(cost<ans){
                 ans=cost;
-                sdp=
-                }          
+                a="("+sdp[si][cut]+sdp[cut][ei]+")";
+                }
             }
             dp[si][ei]=ans;
             sdp[si][ei]=a;
@@ -922,7 +924,7 @@ public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
         //writing in different contexts
         int[]arr={1,2,3,4,5,6};
         int[][]dp=new int[arr.length][arr.length];
-        System.out.println(mcm_dp(arr,0,arr.length-1,dp));
+        System.out.println(mcm_dp_ans(arr,0,arr.length-1,dp));
         display(dp);
     }
 }
