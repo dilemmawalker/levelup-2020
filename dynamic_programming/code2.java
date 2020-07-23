@@ -835,11 +835,12 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
 
     if(dp[si][ei]!=0)return dp[si][ei];
 
-    int ans=0;
+    int ans=1000000;
     for(int cut=si+1;cut<ei;cut++){
         int left=mcm(arr,si,cut,dp);
         int right=mcm(arr,cut,ei,dp);
         int cost=left+ arr[si]*arr[cut]*arr[ei] +right;
+        if(cost<ans)
         ans=cost;
     }
     return dp[si][ei]=ans;
@@ -851,17 +852,45 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
             if(si+1==ei)
             continue;
 
-            int ans=0;
+            int ans=1000000;
             for(int cut =si+1;cut<ei;cut++){
                 int left=dp[si][cut];
                 int right=dp[cut][ei];
-                ans=left + arr[si]*arr[cut]*arr[ei] + right;
+                int cost=left + arr[si]*arr[cut]*arr[ei] + right;
+                if(cost<ans)
+                ans=cost;
             }
             dp[si][ei]=ans;
         }
     }
     return dp[0][n-1];
 }
+public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
+    int n=arr.length;
+    int[][]sdp=new int[n][n];
+    for(int gap=1;gap<n;gap++){
+        for(si=0,ei=gap;ei<n;si++,ei++){
+            if(si+1==ei)
+            continue;
+
+            int ans=1000000;
+            String a="";
+            for(int cut=si+1;cut<ei;cut++){
+                int left=dp[si][cut];
+                int right=dp[cut][ei];
+                int cost=left+arr[si]*arr[cut]*arr[ei]+right;
+                if(cost<ans){
+                ans=cost;
+                sdp=
+                }          
+            }
+            dp[si][ei]=ans;
+            sdp[si][ei]=a;
+        }
+    }
+    return sdp[0][n-1];
+}
+
     
     public static void display(int[][]arr){
         int n=arr.length;
