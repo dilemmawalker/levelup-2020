@@ -865,7 +865,6 @@ public static int mcm(int []arr,int si,int ei,int[][]dp){
     }
     return dp[0][n-1];
 }
-//sdfghjk
 public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
     int n=arr.length;
     String[][]sdp=new String[n][n];
