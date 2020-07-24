@@ -892,7 +892,45 @@ public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
     }
     return sdp[0][n-1];
 }
+public static int OBST(int[]freq,int si,int ei,int [][]dp){
+    
+    int ans=1000000;
+    for(int cut =si;cut<=ei;cut++){
+        int left=si==cut?0:OBST(freq,si,cut-1,dp);
+        int right=ei==cut?0:OBST(freq,cut+1,ei,dp);
+        int cost=left+cost_calc(freq,si,ei)+right;
+        if(cost<ans)
+        ans=cost;
+    }
+    return dp[si][ei]=ans;
+}
+public static int cost_calc(int[]freq,int si,int ei){
+    int sum=0;
+    for(int i=si;i<=ei;i++)
+    sum+=freq[i];
+    return sum;
+}
+public static int OBST_DP(int[]freq,int si,int ei,int [][]dp){
+    int n=freq.length;
+    int []psa=new int[n+1];
+    for(int i=1;i<=n;i++)
+    psa[i]=psa[i-1]+freq[i-1];
 
+    for(int gap=0;gap<n;gap++){
+        for(si=0,ei=gap;ei<n;si++,ei++){
+            int ans=1000000;
+    for(int cut =si;cut<=ei;cut++){
+        int left=si==cut?0:dp[si][cut-1];
+        int right=ei==cut?0:dp[cut+1][ei];
+        int cost=left+psa[ei+1]-psa[si]+right;
+        if(cost<ans)
+        ans=cost;
+    }
+    dp[si][ei]=ans;
+        }
+    }
+    return dp[0][n-1];
+}
     
     public static void display(int[][]arr){
         int n=arr.length;
@@ -922,9 +960,9 @@ public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
         // int []val={0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15,8};
         // int[]wt={10,20,30};
         //writing in different contexts
-        int[]arr={3,7,2,6,5,4};
+        int[]arr={34,8,50};
         int[][]dp=new int[arr.length][arr.length];
-        System.out.println(mcm_dp_ans(arr,0,arr.length-1,dp));
+        System.out.println(OBST_DP(arr,0,arr.length-1,dp));
         display(dp);
     }
 }
