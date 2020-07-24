@@ -871,7 +871,7 @@ public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
     for(int gap=1;gap<n;gap++){
         for(si=0,ei=gap;ei<n;si++,ei++){
             if(si+1==ei){
-                sdp[si][ei]="A";
+                sdp[si][ei]=((char)('A'+si))+"";
             continue;
             }
 
@@ -922,7 +922,7 @@ public static String mcm_dp_ans(int []arr,int si,int ei,int [][]dp){
         // int []val={0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15,8};
         // int[]wt={10,20,30};
         //writing in different contexts
-        int[]arr={1,2,3,4,5,6};
+        int[]arr={3,7,2,6,5,4};
         int[][]dp=new int[arr.length][arr.length];
         System.out.println(mcm_dp_ans(arr,0,arr.length-1,dp));
         display(dp);
