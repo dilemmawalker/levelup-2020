@@ -931,6 +931,23 @@ public static int OBST_DP(int[]freq,int si,int ei,int [][]dp){
     }
     return dp[0][n-1];
 }
+public static int burst_balloons(int[]arr,int si,int ei,int[][]dp){
+
+    if(dp[si][ei]!=0)
+    return dp[si][ei];
+
+    int lv=si==0?1:arr[si-1];
+    int rv=ei==arr.length-1?1:arr[ei+1];
+    int ans=0;
+    for(int cut=si;cut<=ei;cut++){
+        int left=cut==si?0:burst_balloons(arr,si,cut-1,dp);
+        int right=cut==ei?0:burst_balloons(arr,cut+1,ei,dp);
+        int cost=left+ lv*arr[cut]*rv +right;
+        if(cost<ans)
+        ans=cost;
+    }
+    return dp[si][ei]=ans;
+}
     
     public static void display(int[][]arr){
         int n=arr.length;
@@ -960,9 +977,9 @@ public static int OBST_DP(int[]freq,int si,int ei,int [][]dp){
         // int []val={0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15,8};
         // int[]wt={10,20,30};
         //writing in different contexts
-        int[]arr={34,8,50};
+        int[]arr={2,5,6,3,4};
         int[][]dp=new int[arr.length][arr.length];
-        System.out.println(OBST_DP(arr,0,arr.length-1,dp));
+        System.out.println(burst_balloons(arr,0,arr.length-1,dp));
         display(dp);
     }
 }
