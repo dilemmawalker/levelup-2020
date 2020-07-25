@@ -968,6 +968,27 @@ public static int decode_ways (String str,int si,int ei,int[]dp){
     
     return dp[si]=c;
 }
+public static int decode_ways_dp(String str,int si,int ei,int[]dp){
+    int n=str.length();
+    for(int i=n-1;i>=0;i--){
+        int a=str.charAt(i)-'0';
+        if(i==n-1 && a!=0)
+        dp[i]=1;
+        else if(i==n-2 && a!=0 && (a*10+(str.charAt(i+1)-'0'))<=26){
+            dp[i]=1+dp[i+1];
+        }
+        else if(i==n-1 && a!=0 ){
+            dp[i]=1;
+        }
+        else if(a!=0 && (a*10+(str.charAt(i+1)-'0'))<=26){
+            dp[i]=dp[i+1]+dp[i+2];
+        }
+        else if(a!=0){
+            dp[i]=dp[i+1];
+        }
+    }
+    return dp[0];
+}
     
     public static void display(int[][]arr){
         int n=arr.length;
@@ -999,8 +1020,8 @@ public static int decode_ways (String str,int si,int ei,int[]dp){
         //writing in different contexts
         int[]arr={2,5,6,3,4};
         String str="12";
-        int[]dp=new int[str.length()+1];
-        System.out.println(decode_ways(str,0,str.length()-1,dp));
+        int[]dp=new int[str.length()];
+        System.out.println(decode_ways_dp(str,0,str.length()-1,dp));
         display_1(dp);
     }
 }
