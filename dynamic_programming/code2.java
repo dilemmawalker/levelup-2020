@@ -948,6 +948,26 @@ public static int burst_balloons(int[]arr,int si,int ei,int[][]dp){
     }
     return dp[si][ei]=ans;
 }
+public static int decode_ways (String str,int si,int ei,int[][]dp){
+    if(si>=ei){
+        return dp[si][ei]=1;
+    }
+   
+    if(dp[si][ei]!=0)
+        return dp[si][ei];
+    
+    int c=0;
+         int a=str.charAt(si)-'0';
+    if(a!=0)
+        c+=decode_ways(str,si+1,ei,dp);
+   
+    int b=str.charAt(si+1)-'0';
+    int z=a*10+b;
+    if(z<=26 && z>=1 && a!=0)
+        c+=decode_ways(str,si+2,ei,dp);
+    
+    return dp[si][ei]=c;
+}
     
     public static void display(int[][]arr){
         int n=arr.length;
@@ -978,8 +998,9 @@ public static int burst_balloons(int[]arr,int si,int ei,int[][]dp){
         // int[]wt={10,20,30};
         //writing in different contexts
         int[]arr={2,5,6,3,4};
-        int[][]dp=new int[arr.length][arr.length];
-        System.out.println(burst_balloons(arr,0,arr.length-1,dp));
+        String str="12";
+        int[][]dp=new int[str.length()+1][str.length()+1];
+        System.out.println(decode_ways(str,0,str.length()-1,dp));
         display(dp);
     }
 }
