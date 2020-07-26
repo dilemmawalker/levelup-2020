@@ -989,6 +989,17 @@ public static int decode_ways_dp(String str,int si,int ei,int[]dp){
     }
     return dp[0];
 }
+public static int dis_subseq(String str,int vidx,int[]dp){
+    if(vidx==str.length())
+    return dp[vidx]=1;
+
+    if(dp[vidx]!=0)
+    return dp[vidx];
+
+    int c=0;
+    c+=dis_subseq(str.vidx+1,dp);
+    c+=dis_subseq(str)
+}
     
     public static void display(int[][]arr){
         int n=arr.length;
@@ -1020,8 +1031,8 @@ public static int decode_ways_dp(String str,int si,int ei,int[]dp){
         //writing in different contexts
         int[]arr={2,5,6,3,4};
         String str="12";
-        int[]dp=new int[str.length()];
-        System.out.println(decode_ways_dp(str,0,str.length()-1,dp));
+        int[]dp=new int[str.length()+1];
+        System.out.println(decode_ways_dp(str,0,dp));
         display_1(dp);
     }
 }
