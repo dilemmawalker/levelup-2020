@@ -989,16 +989,37 @@ public static int decode_ways_dp(String str,int si,int ei,int[]dp){
     }
     return dp[0];
 }
-public static int dis_subseq(String str,int vidx,int[]dp){
-    if(vidx==str.length())
-    return dp[vidx]=1;
+// public static int dis_subseq(String str,int vidx,int[]dp){
+//     if(vidx==str.length())
+//     return dp[vidx]=1;
 
-    if(dp[vidx]!=0)
-    return dp[vidx];
+//     if(dp[vidx]!=0)
+//     return dp[vidx];
 
+//     int c=0;
+//     c+=dis_subseq(str.vidx+1,dp);
+//     c+=dis_subseq(str);
+// }
+
+//gfg
+public static int aibjck(String str){
+    int a=0;
+    int b=0;
     int c=0;
-    c+=dis_subseq(str.vidx+1,dp);
-    c+=dis_subseq(str)
+    int n=str.length();
+    for(int i=0;i<n;i++){
+        char ch=str.charAt(i);
+        if(ch=='a'){
+            a=2*a+1;
+        }
+        else if(ch=='b'){
+            b=2*b+a;
+        }
+        else {
+            c=2*c+b;
+        }
+    }
+    return c;
 }
     
     public static void display(int[][]arr){
@@ -1029,10 +1050,11 @@ public static int dis_subseq(String str,int vidx,int[]dp){
         // int []val={0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15,8};
         // int[]wt={10,20,30};
         //writing in different contexts
-        int[]arr={2,5,6,3,4};
-        String str="12";
-        int[]dp=new int[str.length()+1];
-        System.out.println(decode_ways_dp(str,0,dp));
-        display_1(dp);
+        // int[]arr={2,5,6,3,4};
+        // String str="12";
+        // int[]dp=new int[str.length()+1];
+        // System.out.println(decode_ways_dp(str,0,dp));
+        // display_1(dp);
+        System.out.println(aibjck("abcabc"));
     }
 }
