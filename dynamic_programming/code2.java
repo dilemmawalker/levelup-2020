@@ -989,17 +989,6 @@ public static int decode_ways_dp(String str,int si,int ei,int[]dp){
     }
     return dp[0];
 }
-// public static int dis_subseq(String str,int vidx,int[]dp){
-//     if(vidx==str.length())
-//     return dp[vidx]=1;
-
-//     if(dp[vidx]!=0)
-//     return dp[vidx];
-
-//     int c=0;
-//     c+=dis_subseq(str.vidx+1,dp);
-//     c+=dis_subseq(str);
-// }
 
 //gfg
 public static int aibjck(String str){
@@ -1020,6 +1009,20 @@ public static int aibjck(String str){
         }
     }
     return c;
+}
+public static int dis_subseq_2(String str){
+int n=str.length();
+int []arr=new int[26];
+for(int i=0;i<26;i++)
+arr[i]=-1;
+
+for(int i=0;i<n;i++){
+char ch=str.charAt(i);
+if(arr[ch-'a']!=-1){
+    char c=str.charAt()
+}
+}
+
 }
     
     public static void display(int[][]arr){
