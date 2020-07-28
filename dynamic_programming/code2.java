@@ -1076,6 +1076,52 @@ public static int aibjck(String str){
         }
        return dp[vidx]=c%m;
     }
+    public static long decode_ways_2_dp(String str,int vidx,long[]dp){
+        long m=(long)1e9+7;
+        for(vidx=str.length();vidx>=0;vidx--){
+        if(vidx==str.length()){
+         dp[vidx]=1;
+         continue;
+        }
+
+        char ch=str.charAt(vidx);
+        if(ch=='0')
+        continue;
+
+        long c=0;
+
+        if(ch=='*'){
+            c=(c%m + 9*dp[vidx+1]%m)%m;
+            if(vidx+1<=str.length()-1){
+                if(str.charAt(vidx+1)!='*'){
+                    int b=str.charAt(vidx+1)-'0';
+                    if(b<=6)
+                    c=(c%m + (2*dp[vidx+2]%m)%m)%m;
+                    else
+                    c=(c%m + dp[vidx+2]%m)%m;
+                }else{
+                    c=(c%m + (15*dp[vidx+2]%m)%m)%m;
+                }
+            }
+        }else{
+            c=(c%m + dp[vidx+1]%m)%m;
+            if(vidx+1<=str.length()-1){
+                char b=str.charAt(vidx+1);
+                if(b!='*'){
+                    if(((ch-'0')*10 + (b-'0'))<=26)
+                    c=(c%m + dp[vidx+2]%m)%m;
+                }else{
+                    if(ch-'0'==1)
+                        c=(c%m + (9*dp[vidx+2]%m)%m)%m;
+                    else if(ch-'0'==2)
+                    c=(c%m + (6*dp[vidx+2]%m)%m)%m;
+                }
+            }
+        }
+        dp[vidx]=c%m;
+    }
+       return dp[0];
+}
 
     public static void display(int[][]arr){
         int n=arr.length;
@@ -1085,6 +1131,14 @@ public static int aibjck(String str){
         System.out.println();
         }
     }
+
+    // DP toDo :
+// 1. 132
+// 2. 044
+// 3. https://www.geeksforgeeks.org/boolean-parenthesization-problem-dp-37/
+// 4. 096
+// 5. 095
+
     public static void main(String[]args){
         int n=3;
         
@@ -1107,9 +1161,9 @@ public static int aibjck(String str){
         //writing in different contexts
         // int[]arr={2,5,6,3,4};
         String str="1*";
-        int[]dp=new int[str.length()+1];
+        long[]dp=new long[str.length()+1];
         // System.out.println(decode_ways_dp(str,0,dp));
         // display_1(dp);
-        System.out.println(decode_ways_2(str,0,dp));
+        System.out.println(decode_ways_2_dp(str,0,dp));
     }
 }
