@@ -948,26 +948,26 @@ public static int burst_balloons(int[]arr,int si,int ei,int[][]dp){
     }
     return dp[si][ei]=ans;
 }
-public static int decode_ways (String str,int si,int ei,int[]dp){
-    if(si>=ei){
-        return dp[si]=1;
+public static int decode_ways (String str,int si,int ei,int[][]dp){
+    if(si>ei){
+        return dp[si][ei]=1;
     }
    
-    if(dp[si]!=0)
-        return dp[si];
-    
+    if(dp[si][ei]!=0)
+        return dp[si][ei];
     int c=0;
          int a=str.charAt(si)-'0';
     if(a!=0)
         c+=decode_ways(str,si+1,ei,dp);
-   
+   if(si+1<=ei){
     int b=str.charAt(si+1)-'0';
     int z=a*10+b;
     if(z<=26 && z>=1 && a!=0)
         c+=decode_ways(str,si+2,ei,dp);
-    
-    return dp[si]=c;
+   }
+    return dp[si][ei]=c;
 }
+
 public static int decode_ways_dp(String str,int si,int ei,int[]dp){
     int n=str.length();
     for(int i=n-1;i>=0;i--){
@@ -1011,18 +1011,24 @@ public static int aibjck(String str){
     return c;
 }
 public static int dis_subseq_2(String str){
+    str='$'+str;
 int n=str.length();
-int []arr=new int[26];
+int []dp=new int[n];
+dp[0]=1;
+int []lastoccur=new int[26];
 for(int i=0;i<26;i++)
-arr[i]=-1;
+lastoccur[i]=-1;
 
-for(int i=0;i<n;i++){
+for(int i=1;i<n;i++){
 char ch=str.charAt(i);
-if(arr[ch-'a']!=-1){
-    char c=str.charAt()
+dp[i]=dp[i-1]*2;
+if(lastoccur[ch-'a']!=-1){
+    int c=dp[lastoccur[ch-'a']-1];
+    dp[i]-=c;
 }
+lastoccur[ch-'a']=i;
 }
-
+return dp[n-1]-1;
 }
     
     public static void display(int[][]arr){
@@ -1058,6 +1064,6 @@ if(arr[ch-'a']!=-1){
         // int[]dp=new int[str.length()+1];
         // System.out.println(decode_ways_dp(str,0,dp));
         // display_1(dp);
-        System.out.println(aibjck("abcabc"));
+        System.out.println(dis_subseq_2("aba"));
     }
 }
