@@ -1010,27 +1010,72 @@ public static int aibjck(String str){
     }
     return c;
 }
-public static int dis_subseq_2(String str){
-    str='$'+str;
-int n=str.length();
-int []dp=new int[n];
-dp[0]=1;
-int []lastoccur=new int[26];
-for(int i=0;i<26;i++)
-lastoccur[i]=-1;
+    public static int dis_subseq_2(String str){
+        str='$'+str;
+    int n=str.length();
+    int []dp=new int[n];
+    dp[0]=1;
+    int []lastoccur=new int[26];
+    for(int i=0;i<26;i++)
+    lastoccur[i]=-1;
 
-for(int i=1;i<n;i++){
-char ch=str.charAt(i);
-dp[i]=dp[i-1]*2;
-if(lastoccur[ch-'a']!=-1){
-    int c=dp[lastoccur[ch-'a']-1];
-    dp[i]-=c;
-}
-lastoccur[ch-'a']=i;
-}
-return dp[n-1]-1;
-}
+    for(int i=1;i<n;i++){
+    char ch=str.charAt(i);
+    dp[i]=dp[i-1]*2;
+    if(lastoccur[ch-'a']!=-1){
+        int c=dp[lastoccur[ch-'a']-1];
+        dp[i]-=c;
+    }
+    lastoccur[ch-'a']=i;
+    }
+    return dp[n-1]-1;
+    }
 
+    //ans is stored in long format whenever we have have to do % 10^9+7.
+    public static long decode_ways_2(String str,int vidx,long[]dp){
+        if(vidx==str.length())
+        return dp[vidx]=1;
+
+        if(dp[vidx]!=0)
+        return dp[vidx];
+
+        char ch=str.charAt(vidx);
+        if(ch=='0')
+        return 0;
+
+        long m=(long)1e9+7;
+        long c=0;
+
+        if(ch=='*'){
+            c=(c%m + 9*decode_ways_2(str,vidx+1,dp)%m)%m;
+            if(vidx+1<=str.length()-1){
+                if(str.charAt(vidx+1)!='*'){
+                    int b=str.charAt(vidx+1)-'0';
+                    if(b<=6)
+                    c=(c%m + (2*decode_ways_2(str,vidx+2,dp)%m)%m)%m;
+                    else
+                    c=(c%m + decode_ways_2(str,vidx+2,dp)%m)%m;
+                }else{
+                    c=(c%m + (15*decode_ways_2(str,vidx+2,dp)%m)%m)%m;
+                }
+            }
+        }else{
+            c=(c%m + decode_ways_2(str,vidx+1,dp)%m)%m;
+            if(vidx+1<=str.length()-1){
+                char b=str.charAt(vidx+1);
+                if(b!='*'){
+                    if(((ch-'0')*10 + (b-'0'))<=26)
+                    c=(c%m + decode_ways_2(str,vidx+2,dp)%m)%m;
+                }else{
+                    if(ch-'0'==1)
+                        c=(c%m + (9*decode_ways_2(str,vidx+2,dp)%m)%m)%m;
+                    else if(ch-'0'==2)
+                    c=(c%m + (6*decode_ways_2(str,vidx+2,dp)%m)%m)%m;
+                }
+            }
+        }
+       return dp[vidx]=c%m;
+    }
 
     public static void display(int[][]arr){
         int n=arr.length;
@@ -1061,10 +1106,10 @@ return dp[n-1]-1;
         // int[]wt={10,20,30};
         //writing in different contexts
         // int[]arr={2,5,6,3,4};
-        // String str="12";
-        // int[]dp=new int[str.length()+1];
+        String str="1*";
+        int[]dp=new int[str.length()+1];
         // System.out.println(decode_ways_dp(str,0,dp));
         // display_1(dp);
-        System.out.println(dis_subseq_2("aba"));
+        System.out.println(decode_ways_2(str,0,dp));
     }
 }
