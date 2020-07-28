@@ -1122,6 +1122,51 @@ public static int aibjck(String str){
     }
        return dp[0];
 }
+public static long decode_ways_2_2p(String str,int vidx){
+    long m=(long)1e9+7;
+    long a=0;
+    long b=1;
+    long c=0;
+    for(vidx=str.length()-1;vidx>=0;vidx--){
+    c=0;
+
+    char ch=str.charAt(vidx);
+    if(ch=='0')
+    continue;
+
+    if(ch=='*'){
+        c=(c%m + 9*b%m)%m;
+        if(vidx+1<=str.length()-1){
+            if(str.charAt(vidx+1)!='*'){
+                int d=str.charAt(vidx+1)-'0';
+                if(d<=6)
+                c=(c%m + (2*a%m)%m)%m;
+                else
+                c=(c%m + a%m)%m;
+            }else{
+                c=(c%m + (15*a%m)%m)%m;
+            }
+        }
+    }else{
+        c=(c%m + b%m)%m;
+        if(vidx+1<=str.length()-1){
+            char d=str.charAt(vidx+1);
+            if(d!='*'){
+                if(((ch-'0')*10 + (d-'0'))<=26)
+                c=(c%m + a%m)%m;
+            }else{
+                if(ch-'0'==1)
+                    c=(c%m + (9*a%m)%m)%m;
+                else if(ch-'0'==2)
+                c=(c%m + (6*a%m)%m)%m;
+            }
+        }
+    }
+    a=b;
+    b=c;
+}
+   return c;
+}
 
     public static void display(int[][]arr){
         int n=arr.length;
@@ -1130,6 +1175,10 @@ public static int aibjck(String str){
         System.out.print(arr[i][j]+" ");
         System.out.println();
         }
+    }public static void display_long(long[]dp){
+        int n=dp.length;
+        for(int i=0;i<n;i++)
+        System.out.println(dp[i]+" ");
     }
 
     // DP toDo :
@@ -1160,10 +1209,11 @@ public static int aibjck(String str){
         // int[]wt={10,20,30};
         //writing in different contexts
         // int[]arr={2,5,6,3,4};
-        String str="1*";
+        String str="1****3456743456********";
         long[]dp=new long[str.length()+1];
         // System.out.println(decode_ways_dp(str,0,dp));
         // display_1(dp);
         System.out.println(decode_ways_2_dp(str,0,dp));
+        display_long(dp);
     }
 }
