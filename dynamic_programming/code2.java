@@ -1030,6 +1030,7 @@ lastoccur[ch-'a']=i;
 }
 return dp[n-1]-1;
 }
+
     
     public static void display(int[][]arr){
         int n=arr.length;
