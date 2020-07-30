@@ -17,7 +17,7 @@ public class code{
         int ls=size(arr,2*idx+1);
         int rs=size(arr,2*idx+2);
         return ls+rs+1;
-    }
+    }=
     public static void main(String[]args){
         int[]arr={ 2, 3, 11, 5, -1, 1, 7, 23, 6, 2, 237};
         System.out.println(size(arr,0));
