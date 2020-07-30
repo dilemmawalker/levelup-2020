@@ -1122,54 +1122,49 @@ public static int aibjck(String str){
     }
        return dp[0];
 }
+//fast
 public static long decode_ways_2_2p(String str,int vidx){
     long m=(long)1e9+7;
          long a=0;
-         long b=0;
-         long
-    for(vidx=str.length();vidx>=0;vidx--){
-    if(vidx==str.length()){
-     dp[vidx]=1;
-     continue;uihdh
-    }
+         long b=1;
+         long c=0;
+    for(vidx=str.length()-1;vidx>=0;vidx--){
+        c=0;
 
     char ch=str.charAt(vidx);
-    if(ch=='0')
-    continue;
-
-    long c=0;
 
     if(ch=='*'){
-        c=(c%m + 9*dp[vidx+1]%m)%m;
+        c=(c%m + 9*b%m)%m;
         if(vidx+1<=str.length()-1){
             if(str.charAt(vidx+1)!='*'){
-                int b=str.charAt(vidx+1)-'0';
-                if(b<=6)
-                c=(c%m + (2*dp[vidx+2]%m)%m)%m;
+                int d=str.charAt(vidx+1)-'0';
+                if(d<=6)
+                c=(c%m + (2*a%m)%m)%m;
                 else
-                c=(c%m + dp[vidx+2]%m)%m;
+                c=(c%m + a%m)%m;
             }else{
-                c=(c%m + (15*dp[vidx+2]%m)%m)%m;
+                c=(c%m + (15*a%m)%m)%m;
             }
         }
-    }else{
-        c=(c%m + dp[vidx+1]%m)%m;
+    }else if(ch>'0'){
+        c=(c%m + b%m)%m;
         if(vidx+1<=str.length()-1){
-            char b=str.charAt(vidx+1);
-            if(b!='*'){
+            char d=str.charAt(vidx+1);
+            if(d!='*'){
                 if(((ch-'0')*10 + (b-'0'))<=26)
-                c=(c%m + dp[vidx+2]%m)%m;
+                c=(c%m + a%m)%m;
             }else{
                 if(ch-'0'==1)
-                    c=(c%m + (9*dp[vidx+2]%m)%m)%m;
+                    c=(c%m + (9*a%m)%m)%m;
                 else if(ch-'0'==2)
-                c=(c%m + (6*dp[vidx+2]%m)%m)%m;
+                c=(c%m + (6*a%m)%m)%m;
             }
         }
     }
-    dp[vidx]=c%m;
+    a=b;
+    b=c;
 }
-   return dp[0];
+  return c;
 }
 
     public static void display(int[][]arr){
