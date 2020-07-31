@@ -19,23 +19,26 @@ public class code{
         return ls+rs+1;
     }
     public static class heap{
-        
-        public heap(ArrayList<Integer>arr){
-            int n=arr.size();
-            for(int i=n-1;i>=0;i--){
-                downheapify(arr,i,n);
-            }
+
+        ArrayList<Integer>arr=new ArrayList<>();
+
+        public heap(ArrayList<Integer>list){
+            int n=list.size();
             for(int i=0;i<n;i++)
-            System.out.print(arr.get(i)+" ");
-        }
-    public void swap(ArrayList<Integer>arr,int a,int b){
+            arr.add(list.get(i));
+            for(int i=n-1;i>=0;i--)
+                downheapify(i,n);
+                // for(int i=0;i<n;i++)
+                // System.out.print(arr.get(i)+" ");
+            }
+    public void swap(int a,int b){
         int ele1=arr.get(a);
         int ele2=arr.get(b);
 
         arr.set(a,ele2);
         arr.set(b,ele1);
     }
-    public void downheapify(ArrayList<Integer>arr,int pi,int n){
+    public void downheapify(int pi,int n){
         int lci=2*pi+1;
         int rci=2*pi+2;
         int max=pi;
@@ -46,9 +49,29 @@ public class code{
         max=rci;
 
         if(pi!=max){
-        swap(arr,pi,max);
-        downheapify(arr,max,n);
+        swap(pi,max);
+        downheapify(max,n);
         }
+    }
+    public boolean isempty(){
+        if(arr.size()==0)
+        return true;
+        return false;
+    }
+    public int size(){
+        return arr.size();
+    }
+    public int top(){
+        if(arr.size()==0)
+        return -1;
+
+        return arr.get(0);
+    }
+    public int pop(){
+        swap(0,arr.size()-1);
+        int a=arr.remove(arr.size()-1);
+        downheapify(0,arr.size());
+        return a;
     }
 }
     public static void main(String[]args){
@@ -67,6 +90,12 @@ public class code{
         arr.add(237);
 
         // System.out.println(size(arr,0));
-        heap(arr);
+        heap pq=new heap(arr);
+        pq.pop();
+        pq.pop();
+        int n=pq.size();
+        for(int i=0;i<n;i++)
+        System.out.print(pq.pop()+" ");
+
     }
 }
