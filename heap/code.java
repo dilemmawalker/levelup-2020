@@ -28,8 +28,6 @@ public class code{
             arr.add(list.get(i));
             for(int i=n-1;i>=0;i--)
                 downheapify(i,n);
-                // for(int i=0;i<n;i++)
-                // System.out.print(arr.get(i)+" ");
             }
     public void swap(int a,int b){
         int ele1=arr.get(a);
