@@ -53,6 +53,30 @@ public class code{
         downheapify(max,n);
         }
     }
+    public void upheapify(int ci){
+        int pi=(ci-1)/2;
+        int min=ci;
+
+        if(pi>=0 && arr.get(pi)<arr.get(ci))
+        min=pi;
+
+        if(ci!=min){
+            swap(min,ci);
+            upheapify(pi);
+        }
+    }
+    public void upheapify_2(int ci){
+        if(ci==0)return;
+        int pi=(ci-1)/2;
+        int max=ci;
+        if(pi>=0 && arr.get(pi)>arr.get(ci))
+        max=pi;
+
+        if(ci==max){
+            swap(pi,max);
+            upheapify_2(pi);
+        }
+    }
     public boolean isempty(){
         if(arr.size()==0)
         return true;
@@ -72,6 +96,10 @@ public class code{
         int a=arr.remove(arr.size()-1);
         downheapify(0,arr.size());
         return a;
+    }
+    public void add(int val){
+        arr.add(val);
+        upheapify(arr.size()-1);
     }
 }
     public static void main(String[]args){
@@ -93,6 +121,8 @@ public class code{
         heap pq=new heap(arr);
         pq.pop();
         pq.pop();
+        pq.add(50);
+        pq.add(100);
         int n=pq.size();
         for(int i=0;i<n;i++)
         System.out.print(pq.pop()+" ");
