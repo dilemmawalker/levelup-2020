@@ -23,7 +23,7 @@ public class code{
         ArrayList<Integer>arr=new ArrayList<>();
         boolean maxheap=false;
 
-        public heap(ArrayList<Integer>list,boolean maxheap){
+        public heap(ArrayList<Integer>list,boolean maxheap){ 
             this.maxheap=maxheap;
             int n=list.size();
             for(int i=0;i<n;i++)
