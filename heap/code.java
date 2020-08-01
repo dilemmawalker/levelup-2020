@@ -21,8 +21,10 @@ public class code{
     public static class heap{
 
         ArrayList<Integer>arr=new ArrayList<>();
+        boolean maxheap=false;
 
-        public heap(ArrayList<Integer>list){
+        public heap(ArrayList<Integer>list,boolean maxheap){
+            this.maxheap=maxheap;
             int n=list.size();
             for(int i=0;i<n;i++)
             arr.add(list.get(i));
@@ -36,14 +38,19 @@ public class code{
         arr.set(a,ele2);
         arr.set(b,ele1);
     }
+    public int compare_to(int a,int b){
+        if(maxheap)
+        return arr.get(a)-arr.get(b);
+        return arr.get(b)-arr.get(a);
+    }
     public void downheapify(int pi,int n){
         int lci=2*pi+1;
         int rci=2*pi+2;
         int max=pi;
 
-        if(lci<n && arr.get(lci)>arr.get(max))
+        if(lci<n && compare_to(lci,max)>0)
             max=lci;
-        if(rci<n && arr.get(rci)>arr.get(max))
+        if(rci<n && compare_to(rci,max)>0)
         max=rci;
 
         if(pi!=max){
@@ -55,7 +62,7 @@ public class code{
         int pi=(ci-1)/2;
         int min=ci;
 
-        if(pi>=0 && arr.get(pi)<arr.get(ci))
+        if(pi>=0 && compare_to(pi,ci)<0)
         min=pi;
 
         if(ci!=min){
@@ -116,7 +123,7 @@ public class code{
         arr.add(237);
 
         // System.out.println(size(arr,0));
-        heap pq=new heap(arr);
+        heap pq=new heap(arr,false);
         pq.pop();
         pq.pop();
         pq.add(50);
