@@ -35,7 +35,7 @@ public class code2{
                 }
             }
             return pq.peek();
-    }//
+    }
     class KthLargest {
 
         PriorityQueue<Integer>pq=new PriorityQueue<>();
