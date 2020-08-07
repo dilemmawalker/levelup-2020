@@ -9,7 +9,7 @@ public class code2{
         // PriorityQueue<Integer>pq=new PriorityQueue<>();  //min PQ  by default
         //  PriorityQueue<Integer>pq=new PriorityQueue<>(Collections.reverseOrder());  // max PQ
 
-        PriorityQueue<Integer>pq=new PriorityQueue<>((a,b)->{    //comparator 
+        PriorityQueue<Integer>pq=new PriorityQueue<>((a,b)->{    //comparator
            return a-b;   //this-other    for min PQ
         // return b-a;   //other-this    for max PQ
         });
@@ -21,7 +21,7 @@ public class code2{
         while(pq.size()!=0)
         System.out.print(pq.remove()+" ");
     }
-    public static void find_k_largest(int []arr,int k){
+    public static int find_k_largest(int []arr,int k){
         PriorityQueue<Integer>pq=new PriorityQueue<>();
         int i=0;
         int n=arr.length;
@@ -39,12 +39,23 @@ public class code2{
     class KthLargest {
 
         PriorityQueue<Integer>pq=new PriorityQueue<>();
+    int a=0;
         public KthLargest(int k, int[] nums) {
-            
+            int n=nums.length;
+            int i=0;
+            while(i<n){
+                pq.add(nums[i++]);
+                if(pq.size()>k)
+                pq.remove();
+            }
+            a=k;
         }
         
         public int add(int val) {
-            
+            pq.add(val);
+            if(pq.size()>a)
+            pq.remove();
+            return pq.peek();
         }
     }
     public static void main(String[]args){
