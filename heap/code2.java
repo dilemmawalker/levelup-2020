@@ -58,6 +58,17 @@ public class code2{
             return pq.peek();
         }
     }
+    public static int kthSmallest(int[][] arr, int k) {
+        PriorityQueue<Integer>pq=new PriorityQueue<>();
+        int n=arr.length;
+        for(int i=0;i<n;i++)
+        pq.add(arr[i]);
+
+        k--;
+        while(k--!=0){
+            pq.
+        }
+    }
     public static void main(String[]args){
         // test1();
         int[]arr={3,2,1,5,6,4};
