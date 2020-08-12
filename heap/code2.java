@@ -59,25 +59,65 @@ public class code2{
         }
     }
     ///////
-    public class 3val(){
-
+    public static class val3{
+        int val=0;
+        int r=0;
+        int c=0;
+        val3(int val,int r,int c){
+            this.val=val;
+            this.r=r;
+            this.c=c;
+        }
+        val3(int r,int c){
+            this.r=r;
+            this.c=c;
+        }
     }
     public static int kthSmallest(int[][] arr, int k) {
-        PriorityQueue<Integer>pq=new PriorityQueue<>();
+        PriorityQueue<val3>pq=new PriorityQueue<>((val3 a,val3 b)->{
+            return a.val-b.val;
+        });
         int n=arr.length;
-        for(int i=0;i<n;i++)
-        pq.add(arr[i]);
-
+        for(int i=0;i<n;i++){
+            pq.add(new val3(arr[i][0],i,0));
+        }
+        int len=arr[0].length;
         k--;
         while(k--!=0){
-            pq.
+            val3 a=pq.remove();
+            if(a.c <len-1)
+            pq.add(new val3(arr[a.r][a.c+1],a.r,a.c+1));
         }
+        return pq.peek().val;
+    }
+    public static int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        PriorityQueue<val3>pq=new PriorityQueue<>((val3 a,val3 b)->{
+            return ((a.r)/(a.c)) -((b.r)/(b.c));
+        });
+        int n=arr.length;
+        for(int i=0;i<n-1;i++){
+            pq.add(new val3(i,n-1));
+        }
+        while(k--!=0){
+            val3 a=pq.remove();
+            int r=a.r;
+            int c=a.c;
+            if(c-1>r){
+                pq.add(new val3(r,c-1));
+            }
+        }
+        int[]an=new int[2];
+        an[0]=arr[pq.peek().r];
+        an[1]=arr[pq.peek().c];
+        return an;
     }
    
     public static void main(String[]args){
         // test1();
-        int[]arr={3,2,1,5,6,4};
-        int k=2;
-        System.out.println(find_k_largest(arr,k));
+        int[]arr={1,2,3,5};
+        int k=3;
+        int[]a=kthSmallestPrimeFraction(arr,k);
+        // System.out.println(kthSmallest(arr,k));
+        System.out.print(a[0]+" "+a[1]);
     }
 }
