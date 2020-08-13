@@ -60,7 +60,7 @@ public class code2{
     }
     ///////
     public static class val3{
-        int val=0;
+        double val=0;
         int r=0;
         int c=0;
         val3(int val,int r,int c){
@@ -90,6 +90,7 @@ public class code2{
         }
         return pq.peek().val;
     }
+    
     public static int[] kthSmallestPrimeFraction(int[] arr, int k) {
         PriorityQueue<val3>pq=new PriorityQueue<>((val3 a,val3 b)->{
             return ((a.r)/(a.c)) -((b.r)/(b.c));
