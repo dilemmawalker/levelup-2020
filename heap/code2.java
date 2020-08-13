@@ -60,7 +60,7 @@ public class code2{
     }
     ///////
     public static class val3{
-        double val=0;
+        int val=0;
         int r=0;
         int c=0;
         val3(int val,int r,int c){
@@ -90,26 +90,29 @@ public class code2{
         }
         return pq.peek().val;
     }
-    
     public static int[] kthSmallestPrimeFraction(int[] arr, int k) {
         PriorityQueue<val3>pq=new PriorityQueue<>((val3 a,val3 b)->{
-            return ((a.r)/(a.c)) -((b.r)/(b.c));
+           double aa=(arr[(int)(a.r)]);
+            aa/=(arr[(int)(a.c)]);
+                double bb=(arr[(int)(b.r)]);
+            bb/=(arr[(int)(b.c)]);
+            return  aa-bb>0?1:-1;
         });
         int n=arr.length;
         for(int i=0;i<n-1;i++){
             pq.add(new val3(i,n-1));
         }
-        while(k--!=0){
+        while(k--!=1){
             val3 a=pq.remove();
-            int r=a.r;
-            int c=a.c;
+            int r=(int)a.r;
+            int c=(int)a.c;
             if(c-1>r){
                 pq.add(new val3(r,c-1));
             }
         }
         int[]an=new int[2];
-        an[0]=arr[pq.peek().r];
-        an[1]=arr[pq.peek().c];
+        an[0]=arr[(int)(pq.peek().r)];
+        an[1]=arr[(int)(pq.peek().c)];
         return an;
     }
    
