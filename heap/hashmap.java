@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.List;
 
 public class hashmap{
     public static void freqmap1(String str){
@@ -96,14 +98,55 @@ public class hashmap{
 
         return ans;
     }
-    public int[] topKFrequent(int[] nums, int k) {
-        
+    public static int[] topKFrequent(int[] arr, int k) {
+        HashMap<Integer,Integer>map=new HashMap<>();
+        int n=arr.length;
+        for(int i=0;i<n;i++){
+            int ch=arr[i];
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+        PriorityQueue<Integer>pq=new PriorityQueue<>(( a,  b)->{
+            return map.get(b)-map.get(a);
+        });
+
+        for(int ele:map.keySet())
+        pq.add(ele);
+
+        int[]ans=new int[k];
+        while(k-->0){
+            ans[k]=pq.remove();
+        }
+        return ans;
+    }
+    public static List<List<String>> groupAnagrams(String[] arr) {
+        HashMap<String,ArrayList<String>>map=new HashMap<>();
+        for(String str :arr){
+
+            int[]ar=new int[26];
+            for(char ch :str)
+                ar[ch-'a']++;
+
+                String a="";
+                for(int i=0;i<26;i++){
+                    if(ar[i]>0)
+                    a+=('a'+i)+ar[i];
+                }
+                map.putIfAbsent(a,new ArrayList<String>());
+            ArrayList<String>ans=map.get(a);
+                ans.add(str);
+                map.put(a,ans);
+        }
+        List<List<String>>ans=new ArrayList<>();
+        for(auto a:map.keySet()){
+            ans.add(map.get(a));
+        }
+        return ans;
     }
     public static void main(String[]args){
         // String str= "aasbaabababababccc";
         // freqmap3(str);
 
-        int[]ans=intersect(new int []{1,2,2,1},new int []{2,2});
+        int[]ans=topKFrequent(new int []{1,1,1,2,2,3},2);
        
         for(int ele :ans)
         System.out.print(ele+" , ");
