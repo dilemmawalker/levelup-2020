@@ -145,22 +145,40 @@ public class hashmap{
         return ans;
     }
     class RandomizedSet {
-        HashMap<Integer,Integer>map=new HashMap<>();
-        
+        HashMap<Integer,Integer>map;
+        ArrayList<Integer>arr;
         public RandomizedSet() {
-            
+            map=new HashMap<Integer,Integer>();
+            arr=new ArrayList<Integer>();
         }
         
         public boolean insert(int val) {
-            
+            if(map.containsKey(val))
+            return false;
+            arr.add(val);
+            map.put(val,arr.size()-1);
+            return true;
         }
         
         public boolean remove(int val) {
-            
+            if(!map.containsKey(val))
+            return false;
+            int a=map.get(val);
+            map.remove(val);
+            swap(a,arr.size()-1);
+            arr.remove(arr.size()-1);
+            map.put(arr.get(a),a);
+            return true;
+        }
+        public void swap(int a,int b){
+            int temp=arr.get(a);
+            arr.add(a,arr.get(b));
+            arr.add(b,temp);
         }
         
         public int getRandom() {
-            
+            int a=(int)(Math.random()*arr.size());
+            return arr.get(a);
         }
     }
     
