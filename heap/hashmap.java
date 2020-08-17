@@ -123,8 +123,10 @@ public class hashmap{
         for(String str :arr){
 
             int[]ar=new int[26];
-            for(char ch :str)
+            for(int i=0;i<26;i++){
+                char ch=str.charAt(i);
                 ar[ch-'a']++;
+            }
 
                 String a="";
                 for(int i=0;i<26;i++){
@@ -137,7 +139,7 @@ public class hashmap{
                 map.put(a,ans);
         }
         List<List<String>>ans=new ArrayList<>();
-        for(auto a:map.keySet()){
+        for(String a:map.keySet()){
             ans.add(map.get(a));
         }
         return ans;
