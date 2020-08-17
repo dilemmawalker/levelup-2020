@@ -131,7 +131,7 @@ public class hashmap{
                 String a="";
                 for(int i=0;i<26;i++){
                     if(ar[i]>0)
-                    a+=('a'+i)+ar[i];
+                    a=a+('a'+i)+ar[i];
                 }
                 map.putIfAbsent(a,new ArrayList<String>());
             ArrayList<String>ans=map.get(a);
@@ -144,6 +144,26 @@ public class hashmap{
         }
         return ans;
     }
+    class RandomizedSet {
+        HashMap<Integer,Integer>map=new HashMap<>();
+        
+        public RandomizedSet() {
+            
+        }
+        
+        public boolean insert(int val) {
+            
+        }
+        
+        public boolean remove(int val) {
+            
+        }
+        
+        public int getRandom() {
+            
+        }
+    }
+    
     public static void main(String[]args){
         // String str= "aasbaabababababccc";
         // freqmap3(str);
