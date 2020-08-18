@@ -172,8 +172,8 @@ public class hashmap{
         }
         public void swap(int a,int b){
             int temp=arr.get(a);
-            arr.add(a,arr.get(b));
-            arr.add(b,temp);
+            arr.set(a,arr.get(b));
+            arr.set(b,temp);
         }
         
         public int getRandom() {
