@@ -217,7 +217,7 @@ public class hashmap{
         }
     }
     class Solution {
-        public int trapRainWater(int[][] heightMap) {
+        public int trapRainWater(int[][] arr) {
             
         }
     }
