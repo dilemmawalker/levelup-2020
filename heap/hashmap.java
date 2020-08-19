@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.List;
+import java.util.Collections;
 
 public class hashmap{
     public static void freqmap1(String str){
@@ -181,6 +182,46 @@ public class hashmap{
             return arr.get(a);
         }
     }
+    class MedianFinder {
+        PriorityQueue<Integer>pq1;
+        PriorityQueue<Integer>pq2;
+        public MedianFinder() {
+            pq1=new PriorityQueue<>(Collections.reverseOrder());
+            pq2=new PriorityQueue<>();
+        }
+        
+        public void addNum(int num) {
+            int a=pq1.peek();
+            int b=pq2.peek();
+            if(num<=a){
+                pq1.add(num);
+                if(pq1.size()-pq2.size()>1){
+                    pq2.add(pq1.remove());
+                }
+            }else{
+                pq2.add(num);
+                if(pq2.size()>pq1.size()){
+                    pq1.add(pq2.remove());
+                }
+            }
+        }
+        
+        public double findMedian() {
+            int size=pq1.size()+pq2.size();
+            if(size%2==0){
+                double a=pq1.peek()+pq2.peek();
+                a/=2;
+                return a;
+            }else
+            return pq1.peek();
+        }
+    }
+    class Solution {
+        public int trapRainWater(int[][] heightMap) {
+            
+        }
+    }
+    
     
     public static void main(String[]args){
         // String str= "aasbaabababababccc";
