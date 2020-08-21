@@ -218,7 +218,42 @@ public class hashmap{
     }
     class Solution {
         public int trapRainWater(int[][] arr) {
-            
+            PriorityQueue<int[]>pq=new PriorityQueue<>((int[]a, int[]b)->{
+               return a[0]-b[0];
+            });
+            int[][]dir=new int[][]{{0,1},{1,0},{0,-1},{-1,0}};
+            int n=arr.length;
+            int m=arr[0].length;
+            for(int i=0;i<m;i++){
+                pq.add(new int[]{arr[0][i],0,i});
+                arr[0][i]=-1;
+                pq.add(new int[]{arr[n-1][i],n-1,i});
+                arr[n-1][i]=-1;
+            }
+            for(int i=0;i<n;i++){
+                pq.add(new int[]{arr[i][0],i,0});
+                arr[i][0]=-1;
+                pq.add(new int[]{arr[i][m-1],i,m-1});
+                arr[i][m-1]=-1;
+            }
+            int max=0;
+            int w=0;
+            while(pq.size()!=0){
+                int[] ele=pq.remove();
+                max=Math.max(max,ele[0]);
+                for(int i=0;i<4;i++){
+                    int r=ele[1];
+                    int c=ele[2];
+                    r=r+dir[i][0];
+                    c=c+dir[i][1];
+                    if(r>=0 && r<n && c>=0 && c<m && arr[r][c]!=-1 ){
+                        w+=Math.max(0,max-arr[r][c]);
+                        pq.add(new int[]{arr[r][c],r,c});
+                        arr[r][c]=-1;
+                    }
+                }
+            }
+            return w;
         }
     }
     
