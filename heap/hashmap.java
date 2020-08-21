@@ -270,25 +270,7 @@ class Node {
     }
 }
 */
-    class Solution {
-        public Node copyRandomList(Node head) {
-            
-            if(head==null)
-            return null;
-
-            Node n=new Node(head.val);
-            
-            Node n2=n;
-            while( head.next!=null){
-                n2.next=new Node(head.next.val);
-                n2.random=head.random;
-                n2=n2.next;
-                head=head.next;
-            }
-            n2.random=head.random;
-            return n;
-        }
-    }
+   
     
     
     public static void main(String[]args){
