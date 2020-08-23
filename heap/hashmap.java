@@ -210,7 +210,7 @@ public class hashmap{
             int size=pq1.size()+pq2.size();
             if(size%2==0){
                 double a=pq1.peek()+pq2.peek();
-                a/=2;
+                a/=2; 
                 return a;
             }else
             return pq1.peek();
@@ -256,7 +256,7 @@ public class hashmap{
             return w;
         }
     }
-    /*
+   
 // Definition for a Node.
 class Node {
     int val;
@@ -269,10 +269,75 @@ class Node {
         this.random = null;
     }
 }
-*/
+
+
+    public Node copyRandomList(Node head) {
+       if(head==null)
+       return null;
+
+       Node n=head;
+       //make new nodes in LL 
+       while(head!=null){
+           Node temp=head.next;
+           head.next=new Node(head.val);
+           head.next.next=temp;
+           head=head.next.next;
+       }
+       head=n;
+       //give values of random pointer
+        while(head!=null){
+            Node temp=head.random;
+            head=head.next;
+            if(temp!=null)
+            head.random=temp.next;
+            head=head.next;
+        }
+        head=n;
+        Node hh=head.next;
+        //make continuous list as requirement
+       while(head!=null){
+           Node n1=head;
+           head=head.next;
+           
+           Node n2=head;
+           head=head.next;
+           n1.next=head;
+           if(head!=null)
+           n2.next=head.next;
+       }
+        return hh;
+    }
+
+public int swimInWater(int[][] arr) {
+    PriorityQueue<int[]>pq=new PriorityQueue<>((int[]a,int[]b)->{
+       return a[0]-b[0];
+    });
+    pq.add(new int[]{arr[0][0],0,0});
+    arr[0][0]=-1;
+    int max=0;
+    int[][]dir={{-1,0},{0,1},{1,0},{0,-1}};
+    int n=arr.length;
+    int m=arr[0].length;
+    while(pq.size()!=0){
+        int[]a=pq.remove();
+        int val=a[0];
+        max=Math.max(max,val);
+        int r=a[1];
+        int c=a[2];
+        if(r==n-1 && c==m-1)
+        return max;
+        for(int i=0;i<4;i++){
+            int x=r+dir[i][0];
+            int y=c+dir[i][1];
+            if(x>=0 && y>=0 && x<n && y<m && arr[x][y]!=-1){
+                pq.add(new int[]{arr[x][y],x,y});
+                arr[x][y]=-1;
+            }
+        }
+    }
+    return max;
+}
    
-    
-    
     public static void main(String[]args){
         // String str= "aasbaabababababccc";
         // freqmap3(str);
