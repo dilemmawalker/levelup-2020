@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.List;
 import java.util.Collections;
+import java.util.LinkedList;
 
 public class hashmap{
     public static void freqmap1(String str){
@@ -336,6 +337,39 @@ public int swimInWater(int[][] arr) {
         }
     }
     return max;
+}
+class LRUCache {
+    HashMap<Integer,Integer>map=new HashMap<>();
+    LinkedList<Integer>ll=new LinkedList<>();
+    int size=0;
+    int c=0;
+    public LRUCache(int capacity) {
+        c=capacity;
+    }
+    
+    public int get(int key) {
+        if(!map.containsKey(key))
+        return -1;
+
+        // ll<Integer> a=new ll<>();
+        //  ll.remove("key");
+        ll.addFirst(key);
+        return map.get(key);
+    }
+    
+    public void put(int key, int val) {
+        if(map.containsKey(key)){
+            map.remove(key);
+           // ll.remove("key");
+        }
+        map.put(key,val);
+        ll.addFirst(key);
+        size++;
+        if(size>c){
+           int a= ll.removeLast();
+            map.remove(a);
+        }
+    }
 }
    
     public static void main(String[]args){
