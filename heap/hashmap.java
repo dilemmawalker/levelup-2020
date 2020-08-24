@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import java.util.List;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.lang.Math;
 
 public class hashmap{
     public static void freqmap1(String str){
@@ -373,14 +374,21 @@ class LRUCache {
         }
     }
 }
+public static double sol(){
+    double b=1.54;
+    b*=1.0000001;
+    return b;
+}
    
     public static void main(String[]args){
         // String str= "aasbaabababababccc";
         // freqmap3(str);
 
-        int[]ans=topKFrequent(new int []{1,1,1,2,2,3},2);
+        // int[]ans=topKFrequent(new int []{1,1,1,2,2,3},2);
        
-        for(int ele :ans)
-        System.out.print(ele+" , ");
+        // for(int ele :ans)
+        // System.out.print(ele+" , ");
+        // System.out.print(fixed);
+        System.out.print(sol());
     }
 }
