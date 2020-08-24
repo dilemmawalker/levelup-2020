@@ -341,7 +341,6 @@ public int swimInWater(int[][] arr) {
 class LRUCache {
     HashMap<Integer,Integer>map=new HashMap<>();
     LinkedList<Integer>ll=new LinkedList<>();
-    int size=0;
     int c=0;
     public LRUCache(int capacity) {
         c=capacity;
@@ -351,21 +350,24 @@ class LRUCache {
         if(!map.containsKey(key))
         return -1;
 
-        // ll<Integer> a=new ll<>();
-        //  ll.remove("key");
+          for(int i=0;i<ll.size();i++)
+                if(ll.get(i)==key){
+            ll.remove(i);
+                    break;}
         ll.addFirst(key);
         return map.get(key);
     }
     
     public void put(int key, int val) {
         if(map.containsKey(key)){
-            map.remove(key);
-           // ll.remove("key");
+            for(int i=0;i<ll.size();i++)
+                if(ll.get(i)==key){
+            ll.remove(i);
+                    break;}
         }
         map.put(key,val);
         ll.addFirst(key);
-        size++;
-        if(size>c){
+        if(ll.size()>c){
            int a= ll.removeLast();
             map.remove(a);
         }
