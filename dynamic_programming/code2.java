@@ -1208,11 +1208,11 @@ public static long decode_ways_2_2p(String str,int vidx){
         // int[]wt={10,20,30};
         //writing in different contexts
         // int[]arr={2,5,6,3,4};
-        String str="1*";
-        long[]dp=new long[str.length()+1];
+        // String str="1*";
+        // long[]dp=new long[str.length()+1];
         // System.out.println(decode_ways_dp(str,0,dp));
         // display_1(dp);
-        System.out.println(decode_ways_2_2p(str,0));
-        // display_long(dp);
+        // System.out.println(decode_ways_2_2p(str,0));
+        // display_long(dp);//
     }
 }

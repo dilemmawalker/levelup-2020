@@ -374,14 +374,22 @@ class LRUCache {
         }
     }
 }
+public static String aa(){
+    double num = 1.34;
+
+    String str=String.format("%.8f", num);
+    return str;
+}
    
     public static void main(String[]args){
         // String str= "aasbaabababababccc";
         // freqmap3(str);
 
-        int[]ans=topKFrequent(new int []{1,1,1,2,2,3},2);
+        // int[]ans=topKFrequent(new int []{1,1,1,2,2,3},2);
        
-        for(int ele :ans)
-        System.out.print(ele+" , ");
+        // for(int ele :ans)
+        // System.out.print(ele+" , ");
+        System.out.println(aa());
+        // aa();
     }
 }
